@@ -17,9 +17,13 @@ git status			//查詢是否有更新移動之檔案
 
 git add t1.txt			//新增t1.txt至暫存資料區 (還沒上傳到GitHub)
 
+git add .			//新增資料夾所有檔案
+
+git add .txt			//新增副檔名為.txt的檔案
+
 git reset HEAD t1.txt		//如果用錯了，取消t1.txt的add
 
-git commit -m "註解的內容"	//給t1.txt 做註解 -m為一行內的文字 ，如要多頁的話 -e
+git commit -m "註解的內容"	//給t1.txt 做註解 -m為一行內的文字 ，如要多頁的話 git commit 進入後在最上面新增註解
 
 git push			//將資料上傳拉
 
@@ -54,17 +58,18 @@ git tag -d			//刪除標籤
 
 git log				//按 q 可退出，版面太雜可使用 git log --oneline
 
+查看HEAD的移動記錄
+
+git reflog			//可以查看過去 HEAD 指向過去的提交清單
+
 修改最近的提交記錄
 
 git commit --amend		//Vim環境 ，只指令主要用在 增加最近提交時漏掉的檔案 與 修改最近的提交的內容或註解
 
-目前的版本
+得知目前的版本
 
 git reset --hard HEAD		//使用 HEAD 表示目前的版本
 
-查看HEAD的移動記錄
-
-git reflog			//可以查看過去 HEAD 指向過去的提交清單
 
 刪除最近的提交 : 意思是我要回到commit之前的狀態
 
