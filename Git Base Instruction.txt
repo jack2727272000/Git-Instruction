@@ -1,0 +1,138 @@
+﻿git基本指令 學習筆記
+	
+參考	github基本教學 - 從無到有	https://www.youtube.com/watch?v=py3n6gF5Y00
+					https://github.com/twtrubiks/Git-Tutorials/blob/master/README.md
+
+    	連猴子都能懂得Git入門指南	https://backlog.com/git-tutorial/tw/intro/intro1_1.html
+
+-------------------------------------------------------------------------------------
+
+開啟命令字元(cmd)	指定到資料夾(自己創一個GitHub的資料夾) e.g  cd /d C:\Users\KJ\Desktop\GitHub\thermal-image 
+
+-------------------------------------------------------------------------------------
+
+git clone 網址			//在"Clone or download"按鈕，下載網址的資料 (.git檔)
+
+git status			//查詢是否有更新移動之檔案
+
+git add t1.txt			//新增t1.txt至暫存資料區 (還沒上傳到GitHub)
+
+git reset HEAD t1.txt		//如果用錯了，取消t1.txt的add
+
+git commit -m "註解的內容"	//給t1.txt 做註解 -m為一行內的文字 ，如要多頁的話 -e
+
+git push			//將資料上傳拉
+
+-------------------------------------------------------------------------------------
+
+建立分支
+
+git branch 分支名稱		//建立分支名稱
+
+git branch 			//顯示所有分支
+
+git checkout 分支名稱		//改變目前所在的分支
+
+git branch -d 分支名稱		//刪除分支
+
+-------------------------------------------------------------------------------------
+
+輕量標籤 & 標示標籤
+
+為了標記發布版本的名稱 / 版本號碼
+
+git tag	標籤名稱		//建立輕量標籤
+
+git tag -n 			//顯示所有標籤
+
+git tag -am "標籤內容" 標籤名稱	//建立標示標籤內容 與 標示標籤
+
+git tag -d			//刪除標籤
+
+-------------------------------------------------------------------------------------
+版本控制 - 歷史記錄
+
+git log				//按 q 可退出，版面太雜可使用 git log --oneline
+
+修改最近的提交記錄
+
+git commit --amend		//Vim環境 ，只指令主要用在 增加最近提交時漏掉的檔案 與 修改最近的提交的內容或註解
+
+目前的版本
+
+git reset --hard HEAD		//使用 HEAD 表示目前的版本
+
+查看HEAD的移動記錄
+
+git reflog			//可以查看過去 HEAD 指向過去的提交清單
+
+刪除最近的提交 : 意思是我要回到commit之前的狀態
+
+git reset --hard HEAD~1		//~1為跳回上一個，~2為跳回上上個
+
+除了預設的 mixed 模式外，另外還有 soft 和 hard 模式。欲了解各模式的影響程度，請參照下面的表格。
+
+模式名稱	HEAD的位置	索引	工作目錄
+ soft		  修改		不修改	 不修改
+ mixed		  修改		修改	 不修改
+ hard		  修改		修改	 修改
+
+"" 主要使用的場合 ""
+
+復原修改過的索引的狀態(mixed)
+徹底取消最近的提交(hard)
+只取消提交(soft)
+
+退回到某個版本
+
+git reset --hard HEAD@{數字} 或	 版本號 //首先使用 reflog 命令查找 rebase 以前的提交，確認提交的版本號或「HEAD@{數字}」值。
+				 	//這就是把被 rebase 移動過的分支的前頭位置恢復到提交 rebase 之前的位置，藉此取消 rebase。
+
+取消最近的reset
+
+git reset --hard ORIG_HEAD	 	//ORIG_HEAD是指reset之前的提交，您可以使用ORIG_HEAD復原之前的reset。
+
+-------------------------------------------------------------------------------------
+
+指令刪除
+
+有兩種況狀，一種是確定要從版本庫中刪除該檔案，那就用命令 git rm 刪掉，並且 git commit：
+
+git rm hello.txt
+git commit -m "remove hello.txt"
+
+指令刪除沒辦法還原
+
+手動刪除可以使用 git checkout 可以輕鬆還原檔案
+
+git checkout hello.txt
+
+當某個檔案更改後也儲存了，想恢復成儲存前的版本時，也可用
+
+git checkout hello.txt
+
+-------------------------------------------------------------------------------------
+
+很多時候，我們正在開發一個新功能又或是 debug，然後突然有一個功能需要緊急修正，
+
+但你又不想 commit 現在的狀況，因為根本沒意義，事情只做了一半，這時候 stash
+
+這個實用的指令就派上用場了。
+
+git stash save -u "註解"	  //假如你想要更清楚自己這次的 stash 原因是什麼
+
+git stash list			  //觀看 stash 裡面的東西
+
+git stash pop			  //把 stash 取回來，這指令取回後也會刪除 stash
+
+git stash apply			  //如果希望使用 stash 取回之後，不希望刪除 stash 
+
+git stash clear			  //想要刪除暫存
+
+-------------------------------------------------------------------------------------
+
+修改檔案後
+
+git diff			  //查看檔案的修改內容
+
+git checkout -- 檔案名稱	  //來還原檔案的內容
